@@ -2,11 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:todoey/widgets/tasks_list.dart';
 
 class TasksScreen extends StatelessWidget {
+  Widget buildBotomSheet(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text('This is a bottomsheet'),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: null,
+        onPressed: () {
+          showModalBottomSheet(context: context, builder: buildBotomSheet);
+        },
         backgroundColor: Colors.lightBlueAccent,
         child: Icon(Icons.add),
       ),
