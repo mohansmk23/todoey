@@ -1,36 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey/models/task_data.dart';
 import 'package:todoey/screens/add_task_screen.dart';
-import 'package:todoey/task.dart';
+import 'package:todoey/models/task.dart';
 import 'package:todoey/widgets/tasks_list.dart';
 
-class TasksScreen extends StatefulWidget {
-  @override
-  _TasksScreenState createState() => _TasksScreenState();
-}
-
-class _TasksScreenState extends State<TasksScreen> {
-  List<Task> tasks = [
-    Task(name: 'buy pizza', isDone: false),
-    Task(name: 'buy biryani', isDone: false),
-    Task(name: 'buy shawarma', isDone: false),
-  ];
-
+class TasksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
-              context: context,
-              builder: (context) => AddTaskScreen(
-                    (newvalue) {
-                      setState(() {
-                        print(newvalue);
-                        tasks.add(Task(name: newvalue, isDone: false));
-                      });
-                      Navigator.pop(context);
-                    },
-                  ));
+              context: context, builder: (context) => AddTaskScreen());
         },
         backgroundColor: Colors.lightBlueAccent,
         child: Icon(Icons.add),
@@ -67,7 +49,7 @@ class _TasksScreenState extends State<TasksScreen> {
                         fontWeight: FontWeight.w700),
                   ),
                   Text(
-                    '${tasks.length} Tasks',
+                    '${Provider.of<TaskData>(context).taskCount} Tasks',
                     style: TextStyle(color: Colors.white, fontSize: 18.0),
                   ),
                 ],
@@ -83,9 +65,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(30.0),
                       topRight: Radius.circular(30.0))),
-              child: TasksList(
-                tasks: tasks,
-              ),
+              child: TasksList(),
             ),
           )
         ],
