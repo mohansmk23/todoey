@@ -30,6 +30,11 @@ class AddTaskScreen extends StatelessWidget {
                   newTaskTitle = newValue;
                   print(newTaskTitle);
                 },
+                onSubmitted: (newValue) {
+                  print(newValue);
+                  newTaskTitle = newValue;
+                  print(newTaskTitle);
+                },
               ),
               SizedBox(
                 height: 20.0,
